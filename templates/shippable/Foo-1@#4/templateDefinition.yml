@@ -1,5 +1,4 @@
 pipelines:
-- foo:
   - name: basic1
     steps:
       - name: basic1
