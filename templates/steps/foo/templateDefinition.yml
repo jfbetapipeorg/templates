@@ -1,0 +1,31 @@
+pipelines:
+  - name: basic1
+    steps:
+      - name: basic1
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+        execution:
+          onExecute:
+            - printenv {{ .Values.foo.bar }}
+      - name: basic2
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: basic1
+        execution:
+          onExecute:
+            - printenv {{ .Values.foo.baz }}
+      - name: basic3
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: basic2
+        execution:
+          onExecute:
+            - printenv {{ .Values.foo.zoo }}
