@@ -8,7 +8,7 @@ pipelines:
             type: host
         execution:
           onExecute:
-            - printenv {{ Values.foo.bar }}
+            - printenv {{ .Values.foo.bar }}
       - name: basic2
         type: Bash
         configuration:
@@ -18,4 +18,4 @@ pipelines:
             - name: basic1
         execution:
           onExecute:
-            - printenv {{ Values.foo.baz }}
+            - printenv {{ .Values.foo.bar }}
