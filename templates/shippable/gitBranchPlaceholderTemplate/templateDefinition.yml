@@ -1,0 +1,41 @@
+resources:
+  - name: PIPE_6522_resource
+    type: GitRepo
+    configuration:
+      gitProvider: {{ .Values.GitRepo.gitProvider }} # this will be replaced from values.yml
+      # Repository path, including org name/repo name
+      path: {{ .Values.GitRepo.path }} # this will be replaced from values.yml
+      branches:
+        include: ^{{gitBranch}}$ 
+
+pipelines:
+  - name: PIPE_6522_pipeline_0001
+    steps:
+      - name: PIPE_6522_p0001_step_001
+        type: Bash
+        configuration:
+          inputResources:
+            # Sets up step to be triggered when there are commit events to myFirstRepo
+            - name: PIPE_6522_resource
+        execution:
+          onExecute:
+            - printenv
+      - name: PIPE_6522_p0001_step_002
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: PIPE_6522_p0001_step_001
+        execution:
+          onExecute:
+            - printenv
+
+      {{ if eq "{{gitBranch}}" "master" }}
+      - name: PIPE_6522_p0001_step_003
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: PIPE_6522_p0001_step_002
+        execution:
+          onExecute:
+            - printenv
+      {{ end }}
