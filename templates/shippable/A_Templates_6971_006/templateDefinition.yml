@@ -1,0 +1,8 @@
+pipelines:
+  - name: pipeline_A_Templates_6971_006
+    steps:
+      - name: A_Templates_6971_006
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Running test case A_Templates_6971_006"
