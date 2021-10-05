@@ -1,0 +1,8 @@
+pipelines:
+  - name: pipeline_A_TemplateSync_7118_003
+    steps:
+      - name: A_TemplateSync_7118_003
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Running test case A_TemplateSync_7118_003"
